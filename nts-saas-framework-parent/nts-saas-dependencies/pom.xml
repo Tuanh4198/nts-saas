@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.nentangso</groupId>
+        <artifactId>nts-saas-framework-parent</artifactId>
+        <version>1.3.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>nts-saas-dependencies</artifactId>
+    <packaging>pom</packaging>
+    <name>SaaS server-side dependencies</name>
+    <description>Software as a Service server-side dependencies</description>
+    <url>https://github.com/nentangso/nts-saas</url>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License v3.0</name>
+            <comments>Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.</comments>
+        </license>
+    </licenses>
+    <organization>
+        <name>nentangso.org</name>
+        <url>https://nentangso.org</url>
+    </organization>
+    <developers>
+        <developer>
+            <name>Tien Tran</name>
+            <email>tientq@outlook.com</email>
+            <organization>nentangso.org</organization>
+            <organizationUrl>https://nentangso.org</organizationUrl>
+            <url>https://github.com/tientq</url>
+        </developer>
+    </developers>
+
+    <properties>
+        <!-- Dependency versions -->
+        <pushy.version>0.15.1</pushy.version>
+        <netty.version>4.1.107.Final</netty.version>
+        <netty-tcnative.version>2.0.61.Final</netty-tcnative.version>
+        <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
+        <openapi-generator-maven-plugin.version>5.4.0</openapi-generator-maven-plugin.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
+        <problem-spring.version>0.27.0</problem-spring.version>
+        <apiguardian-api.version>1.1.2</apiguardian-api.version>
+        <checker-qual.version>3.41.0</checker-qual.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>tech.jhipster</groupId>
+                <artifactId>jhipster-dependencies</artifactId>
+                <version>${jhipster-framework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>tech.jhipster</groupId>
+                <artifactId>jhipster-framework</artifactId>
+                <version>${jhipster-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.nentangso</groupId>
+                <artifactId>nts-saas-web-core</artifactId>
+                <version>1.3.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.nentangso</groupId>
+                <artifactId>nts-saas-web</artifactId>
+                <version>1.3.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.nentangso</groupId>
+                <artifactId>nts-saas-webflux</artifactId>
+                <version>1.3.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.nentangso</groupId>
+                <artifactId>nts-saas-starter-web</artifactId>
+                <version>1.3.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.nentangso</groupId>
+                <artifactId>nts-saas-starter-webflux</artifactId>
+                <version>1.3.0-SNAPSHOT</version>
+            </dependency>
+            <!-- Mobile send notification libs -->
+            <dependency>
+                <groupId>com.turo</groupId>
+                <artifactId>pushy</artifactId>
+                <version>${pushy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-tcnative-boringssl-static</artifactId>
+                <version>${netty-tcnative.version}</version>
+            </dependency>
+            <!-- /Mobile send notification libs -->
+            <dependency>
+                <groupId>org.openapitools</groupId>
+                <artifactId>jackson-databind-nullable</artifactId>
+                <version>${jackson-databind-nullable.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apiguardian</groupId>
+                <artifactId>apiguardian-api</artifactId>
+                <version>${apiguardian-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.checkerframework</groupId>
+                <artifactId>checker-qual</artifactId>
+                <version>${checker-qual.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

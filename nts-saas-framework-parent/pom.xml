@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>tech.jhipster</groupId>
+        <artifactId>jhipster-parent</artifactId>
+        <version>7.9.3</version>
+        <relativePath />
+    </parent>
+
+    <groupId>org.nentangso</groupId>
+    <artifactId>nts-saas-framework-parent</artifactId>
+    <version>1.3.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>SaaS server-side parent POM</name>
+    <description>Software as a Service power by nentangso.org</description>
+    <url>https://github.com/nentangso/nts-saas</url>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License v3.0</name>
+            <comments>Permissions of this strong copyleft license are conditioned on making available complete source
+                code of licensed works and modifications, which include larger works using a licensed work, under the
+                same license. Copyright and license notices must be preserved. Contributors provide an express grant of
+                patent rights.
+            </comments>
+        </license>
+    </licenses>
+    <organization>
+        <name>nentangso.org</name>
+        <url>https://nentangso.org</url>
+    </organization>
+    <developers>
+        <developer>
+            <name>Tien Tran</name>
+            <email>tientq@outlook.com</email>
+            <organization>nentangso.org</organization>
+            <organizationUrl>https://nentangso.org</organizationUrl>
+            <url>https://github.com/tientq</url>
+        </developer>
+    </developers>
+
+    <properties>
+        <!-- The nts-saas-framework version should be the same as the artifact version above -->
+        <nts-saas-framework.version>1.3.0-SNAPSHOT</nts-saas-framework.version>
+        <!-- The jhipster-framework version should be the same as the artifact version above -->
+        <jhipster-framework.version>7.9.3</jhipster-framework.version>
+        <!-- The spring-boot version should be the same as the parent version above -->
+        <spring-boot.version>2.7.3</spring-boot.version>
+
+        <!-- Build properties -->
+        <java.version>11</java.version>
+        <maven.version>3.2.5</maven.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
+        <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
+    </properties>
+
+    <scm>
+        <connection>scm:git:git@github.com:nentangso/nts-saas.git</connection>
+        <url>https://github.com/nentangso/nts-saas</url>
+        <tag>v1.3.0-RC6</tag>
+    </scm>
+
+    <modules>
+        <module>nts-saas-dependencies</module>
+        <module>nts-saas-web-core</module>
+        <module>nts-saas-web</module>
+        <module>nts-saas-webflux</module>
+        <module>nts-saas-starter-web</module>
+        <module>nts-saas-starter-webflux</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven-release-plugin.version}</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <preparationGoals>versions:set-property</preparationGoals>
+                    <completionGoals>versions:set-property</completionGoals>
+                    <releaseProfiles>deploy-github</releaseProfiles>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions-maven-plugin.version}</version>
+                <configuration>
+                    <property>nts-saas-framework.version</property>
+                    <newVersion>${project.version}</newVersion>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <configuration>
+                        <skipStaging>true</skipStaging>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>deploy-github</id>
+            <activation>
+                <property>
+                    <name>github</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/nentangso/nts-saas/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/nentangso/nts-saas/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>deploy-central</id>
+            <activation>
+                <property>
+                    <name>!github</name>
+                </property>
+            </activation>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+</project>
